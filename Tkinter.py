@@ -9,7 +9,7 @@ def forca():
       global img 
       global num
 
-      img = Image.open("img0.jpg")
+      img = Image.open("imatges/img"+str(vides)+".png")
       img = img.resize((400, 200))
       img = ImageTk.PhotoImage(img)
       l2.config(image=img)
@@ -23,8 +23,8 @@ win.title('PokePenjat')
 l1 = Label(text="Aplicació PenjAPP", background="black", foreground="white", width=80, border= 10, anchor="center")
 l1.grid(column=0,row=0,columnspan=2)
 
-defaultimg = Image.open("img0.jpg")
-defaultimg = defaultimg.resize((400, 200))
+defaultimg = Image.open("imatges/img0.png")
+defaultimg = defaultimg.resize((200, 200))
 defaultimg = ImageTk.PhotoImage(defaultimg)
 
 l2 = Label(image=defaultimg)

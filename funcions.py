@@ -2,28 +2,19 @@ import random
 from tkinter import *
 from PIL import Image, ImageTk
 
+#Variables
+llista = ["holaaa","adeu","casa",] 
+vides = 1
+guardades = []
+lletra = "a"
 
-llista = [1,2,3,4,5,6,7,8,9,10]
-vides = 6 
-guardades=[]
+
 #Funcio element de la llista random
 def llistar(llista):
     return random.choice(llista)
+aleatori = llistar(llista)
 
-#Forca depen de la vida
-def forca(vides):
-    global img
-
-    img = Image.open("imatges/img"+str(vides)+".jpg")
-    img = img.resize((400, 200))
-    img = ImageTk.PhotoImage(img)
-
-#Funcion guions
-def guions(llistar):
-    long = len(llistar)
-    mult = '-' * long
-    return mult
-
+#Comprovar si la lletra esta guardada
 def comprovar(lletra,guardades):
     while True:
         if lletra in guardades:
@@ -34,18 +25,18 @@ def comprovar(lletra,guardades):
             break
 
  #Bucle hasta que ponga una letra
-def bucle(a):
+def bucle(lletra):
     while True:
         lletra = input("Introdueix una lletra: ")
         if len(lletra) == 1:
-            print ("Has introduit una lletra")
-            guardades.append(lletra)
-       
+            break
         else:
-            print ("Has introduit més d'una lletra")
+            print("Has introduit mes d'una lletra")
             continue
-        comprovar(lletra,guardades)
 
+#Demana una lletra i la guarda
+def demanar(lletra):
+    bucle(lletra)
+    guardades.append(lletra)
+    return guardades
 
-
-bucle()
