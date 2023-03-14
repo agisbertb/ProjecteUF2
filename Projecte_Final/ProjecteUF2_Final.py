@@ -1,9 +1,9 @@
 from tkinter import *
 from PIL import Image, ImageTk
 import random
+from tkinter import messagebox
 
 #Variables
-#llista = ["sirfetch'd"]
 vides = 6
 guardades = set()
 partides= 0
@@ -69,6 +69,10 @@ def comprovar():
                                     eguions.config(text=eguions.cget("text")[:i] + lletra + eguions.cget("text")[i+1:])
                   if "-" not in eguions.cget("text"):
                         l2.config(image=imgG)
+                        if messagebox.askretrycancel(message="¿Vols tornar ha intentar?", title="Has guanyat") == True:
+                              reiniciar()
+                        else:
+                              win.destroy()
 
       else:
                   vides -= 1
