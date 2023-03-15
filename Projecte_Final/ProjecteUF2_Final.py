@@ -2,20 +2,20 @@ from tkinter import *
 from PIL import Image, ImageTk
 import random
 from tkinter import messagebox
+import keyboard
+
 
 #Variables
 vides = 6
 guardades = set()
 partides= 0
 
-with open("Projecte_Final/llista.txt") as llista:
+with open("llista.txt") as llista:
      llista = llista.read().splitlines()
-
-
 #Funcio per canviar la imatge
 def forca():
       global img
-      img = Image.open("Projecte_Final/imatges/img"+str(vides)+".png")
+      img = Image.open("imatges/img"+str(vides)+".png")
       img = img.resize((200, 200))
       img = ImageTk.PhotoImage(img)
       l2.config(image=img)
@@ -54,7 +54,7 @@ def reiniciar():
       l2.config(image=img_inici)
       aleatori()
 #Funció per comprovar la entrada
-def comprovar():
+def comprovar(*args):
       global vides
       lletra = entrada.get()[0]
       bcomençar.config(text="Reiniciar", command=reiniciar)
@@ -69,7 +69,7 @@ def comprovar():
                                     eguions.config(text=eguions.cget("text")[:i] + lletra + eguions.cget("text")[i+1:])
                   if "-" not in eguions.cget("text"):
                         l2.config(image=imgG)
-                        if messagebox.askretrycancel(message="¿Vols tornar ha intentar?", title="Has guanyat") == True:
+                        if messagebox.askyesno(message="¿Vols tornar ha jugar?", title="Has guanyat") == True:
                               reiniciar()
                         else:
                               win.destroy()
@@ -78,7 +78,10 @@ def comprovar():
                   vides -= 1
                   if vides == 0:
                         l2.config(image=imgP)
-                        eguions.config(text="La paraula era: "+paraula)
+                        if messagebox.askyesno(message="La paraula era "+paraula+", Vols tornar ha jugar?", title="Has perdut") == True:
+                              reiniciar()
+                        else:
+                              win.destroy()
                   else:
                         forca()
       marcador_vides.config(text="Vides: "+str(vides))              
@@ -91,23 +94,23 @@ win.geometry("700x400")
 win.configure(bg = 'Orange')
 win.title('PokePenjat')
 
-defaultimg = Image.open("Projecte_Final/imatges/Inici.png")
+defaultimg = Image.open("imatges/Inici.png")
 defaultimg = defaultimg.resize((300, 200))
 defaultimg = ImageTk.PhotoImage(defaultimg)
 
-img_inici = Image.open("Projecte_Final/imatges/img6.png")
+img_inici = Image.open("imatges/img6.png")
 img_inici = img_inici.resize((200, 200))
 img_inici = ImageTk.PhotoImage(img_inici)
 
-imgG = Image.open("Projecte_Final/imatges/Guanyar.png")
+imgG = Image.open("imatges/Guanyar.png")
 imgG = imgG.resize((300, 200))
 imgG = ImageTk.PhotoImage(imgG)
 
-imgP = Image.open("Projecte_Final/imatges/Perdre.png")
+imgP = Image.open("imatges/Perdre.png")
 imgP = imgP.resize((300, 200))
 imgP = ImageTk.PhotoImage(imgP)
 
-imgPK = Image.open("Projecte_Final/imatges/logoPK.png")
+imgPK = Image.open("imatges/logoPK.png")
 imgPK = imgPK.resize((200, 200))
 imgPK = ImageTk.PhotoImage(imgPK)
 
@@ -124,7 +127,8 @@ eguions = Label(text="Paraula")
 eguions.place(x=130,y=255)
 
 entrada = Entry()
-entrada.place(x=190,y=280, width=15)
+entrada.place(x=140,y=280, width=20)
+entrada.bind("<Return>", comprovar)
 
 marcador_vides = Label(text="Vides: "+str(vides), bg="Orange")
 marcador_vides.place(x=400,y=50)
