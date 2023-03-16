@@ -2,7 +2,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 import random
 from tkinter import messagebox
-import keyboard
+from keyboard import *
 
 
 #Variables
@@ -29,6 +29,9 @@ def aleatori():
 #Funció per comenzar la partida
 def començar():
       #Començar la partida
+      global partides
+      partides += 1
+      marcador_partides.config(text="Partides jugades: "+str(partides)) 
       l2.config(image=img_inici)
       aleatori()
 #Funció per reiniciar la partida
@@ -39,7 +42,7 @@ def reiniciar():
 
       partides += 1
       vides = 6
-      marcador_partides.config(text="Partides: "+str(partides)) 
+      marcador_partides.config(text="Partides jugades: "+str(partides)) 
 
       #Borrar contingut de guardades
       guardades = set()
@@ -59,7 +62,7 @@ def comprovar(*args):
       lletra = entrada.get()[0]
       bcomençar.config(text="Reiniciar", command=reiniciar)
 #Guardar letra en guardades
-      if lletra in guardades:
+      if lletra in guardades: 
               return
       guardades.add(lletra)
 #Comprovar si la lletra esta en la paraula
@@ -88,6 +91,9 @@ def comprovar(*args):
       marcador_lletra.config(text="Lletres adivinades: "+str(guardades))
       entrada.delete(0, END)
 
+def limit_entry_length(*args):
+    if len(entrada.get()) > 1:
+        entrada.delete(1, "end")
 
 win = Tk()
 win.geometry("700x400")
@@ -126,9 +132,10 @@ l3.place(x=400,y=150)
 eguions = Label(text="Paraula")
 eguions.place(x=130,y=255)
 
-entrada = Entry()
+entrada = Entry(validate='key', validatecommand=limit_entry_length)
 entrada.place(x=140,y=280, width=20)
 entrada.bind("<Return>", comprovar)
+
 
 marcador_vides = Label(text="Vides: "+str(vides), bg="Orange")
 marcador_vides.place(x=400,y=50)
@@ -141,10 +148,8 @@ marcador_partides.place(x=400,y=70)
 
 #Botons
 bcomençar = Button(text="Començar", command=començar)
-bcomençar.place(x=135,y=310)
+bcomençar.place(x=70,y=310)
 bsortir = Button(text="Sortir", command=win.destroy)
-bsortir.place(x=250,y=310)
-bjugar = Button(text="Jugar", command=comprovar)
-bjugar.place(x=50,y=310)
+bsortir.place(x=170,y=310)
 
 win.mainloop()
