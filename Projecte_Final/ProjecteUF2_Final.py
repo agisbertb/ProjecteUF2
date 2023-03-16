@@ -12,6 +12,7 @@ partides= 0
 
 with open("llista.txt") as llista:
      llista = llista.read().splitlines()
+
 #Funcio per canviar la imatge
 def forca():
       global img
@@ -61,9 +62,11 @@ def comprovar(*args):
       global vides
       lletra = entrada.get()[0]
       bcomençar.config(text="Reiniciar", command=reiniciar)
+      
 #Guardar letra en guardades
       if lletra in guardades: 
-              return
+            messagebox.showinfo(message="Ja has introduit la lletra "+lletra+"\n""introdueïx una altra lletra", title="Lletra introduida")
+            entrada.delete(0, END)
       guardades.add(lletra)
 #Comprovar si la lletra esta en la paraula
       if lletra in paraula:
@@ -130,8 +133,8 @@ eguions.place(x=130,y=255)
 
 entrada = Entry()
 entrada.place(x=140,y=280, width=20)
-entrada.bind("<Return>", comprovar)
 
+entrada.bind("<Return>", comprovar)
 
 marcador_vides = Label(text="Vides: "+str(vides), bg="Orange")
 marcador_vides.place(x=400,y=50)
