@@ -32,7 +32,7 @@ def aleatori():
 
     paraula = random.choice(llista)
     guions = "-" * len(paraula)
-    eguions.config(text=guions)
+    eguions.config(text=guions, font=("Garamond", 15, "bold"))
 #Funció per comenzar la partida
 def començar():
       #Començar la partida
@@ -79,7 +79,7 @@ def comprovar(*args):
       if lletra in paraula:
                   for i in range(len(paraula)):
                         if paraula[i] == lletra:
-                                    eguions.config(text=eguions.cget("text")[:i] + lletra + eguions.cget("text")[i+1:])
+                                    eguions.config(text=eguions.cget("text")[:i] + lletra + eguions.cget("text")[i+1:], font=("Garamond", 15, "bold"))
                   if "-" not in eguions.cget("text"):
                         l2.config(image=imgG)
                         if messagebox.askyesno(message="¿Vols tornar ha jugar?", title="Has guanyat") == True:
@@ -125,7 +125,7 @@ imgPK = Image.open("imatges/logoPK.png")
 imgPK = imgPK.resize((200, 200))
 imgPK = ImageTk.PhotoImage(imgPK)
 
-l1 = Label(text="POKEPENJAT", background="Dark Blue", foreground="white", width=90, border= 10, anchor="center")
+l1 = Label(text="POKEPENJAT", background="Dark Blue", foreground="white", width=90, border= 10, anchor="center", font=("Garamond", 10, "bold"))
 l1.place(x=0,y=0)
 
 l2 = Label(image=defaultimg)
@@ -134,8 +134,9 @@ l2.place(x=50,y=50)
 l3 = Label(image=imgPK)
 l3.place(x=400,y=150)
 
-eguions = Label(text="Paraula")
-eguions.place(x=130,y=255)
+eguions = Label(text="", bg="Orange")
+eguions.place(x=120,y=255)
+
 
 entrada = Entry(win, validate='key')
 entrada.place(x=140,y=280, width=20)
