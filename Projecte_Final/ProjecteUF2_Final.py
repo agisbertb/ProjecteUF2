@@ -70,9 +70,10 @@ def comprovar(*args):
       bcomençar.config(text="Reiniciar", command=reiniciar)
       
 #Guardar letra en guardades
-      if lletra in guardades: 
-            messagebox.showinfo(message="Ja has introduit la lletra "+lletra+"\n""introdueïx una altra lletra", title="Lletra introduida")
+      if lletra in guardades:
+            messagebox.showwarning(message="Ja has introduit la lletra "+lletra+"\n""introdueïx una altra lletra", title="Lletra introduida")
             entrada.delete(0, END)
+            return      
       guardades.add(lletra)
 #Comprovar si la lletra esta en la paraula
       if lletra in paraula:
@@ -85,7 +86,6 @@ def comprovar(*args):
                               reiniciar()
                         else:
                               win.destroy()
-
       else:
                   vides -= 1
                   if vides == 0:
