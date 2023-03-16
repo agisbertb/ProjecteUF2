@@ -91,10 +91,6 @@ def comprovar(*args):
       marcador_lletra.config(text="Lletres adivinades: "+str(guardades))
       entrada.delete(0, END)
 
-def limit_entry_length(*args):
-    if len(entrada.get()) > 1:
-        entrada.delete(1, "end")
-
 win = Tk()
 win.geometry("700x400")
 win.configure(bg = 'Orange')
@@ -132,7 +128,7 @@ l3.place(x=400,y=150)
 eguions = Label(text="Paraula")
 eguions.place(x=130,y=255)
 
-entrada = Entry(validate='key', validatecommand=limit_entry_length)
+entrada = Entry()
 entrada.place(x=140,y=280, width=20)
 entrada.bind("<Return>", comprovar)
 
