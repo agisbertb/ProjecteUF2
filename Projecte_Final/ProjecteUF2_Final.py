@@ -13,6 +13,12 @@ partides= 0
 with open("llista.txt") as llista:
      llista = llista.read().splitlines()
 
+#Funcio per limitar la entrada a una lletra
+def limit_input(text):
+    if len(text) > 1:
+        return False
+    return True
+
 #Funcio per canviar la imatge
 def forca():
       global img
@@ -131,8 +137,9 @@ l3.place(x=400,y=150)
 eguions = Label(text="Paraula")
 eguions.place(x=130,y=255)
 
-entrada = Entry()
+entrada = Entry(win, validate='key')
 entrada.place(x=140,y=280, width=20)
+entrada['validatecommand'] = (entrada.register(limit_input), '%P')
 
 entrada.bind("<Return>", comprovar)
 
