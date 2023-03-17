@@ -27,7 +27,7 @@ def forca():
       img = Image.open("imatges/img"+str(vides)+".png")
       img = img.resize((200, 200))
       img = ImageTk.PhotoImage(img)
-      l2.config(image=img)
+      l2.config(image=img, bg="#ec363d")
 #Funcio element de la llista random
 def aleatori():
     global paraula
