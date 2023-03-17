@@ -9,6 +9,8 @@ from keyboard import *
 vides = 6
 guardades = set()
 partides= 0
+r, g, b,a = 236,54,61,255
+
 
 with open("llista.txt") as llista:
      llista = llista.read().splitlines()
@@ -96,13 +98,13 @@ def comprovar(*args):
                               win.destroy()
                   else:
                         forca()
-      marcador_vides.config(text="Vides: "+str(vides))              
-      marcador_lletra.config(text="Lletres adivinades: "+str(guardades))
+      marcador_vides.config(text="Vides: "+str(vides), font=("Garamond", 10, "bold"))              
+      marcador_lletra.config(text="Lletres utilitzades: "+str(guardades), font=("Garamond", 10, "bold"))
       entrada.delete(0, END)
 
 win = Tk()
 win.geometry("700x400")
-win.configure(bg = 'Orange')
+win.configure(bg = "#ec363d")
 win.title('PokePenjat')
 
 defaultimg = Image.open("imatges/Inici.png")
@@ -125,38 +127,41 @@ imgPK = Image.open("imatges/logoPK.png")
 imgPK = imgPK.resize((200, 200))
 imgPK = ImageTk.PhotoImage(imgPK)
 
-l1 = Label(text="POKEPENJAT", background="Dark Blue", foreground="white", width=90, border= 10, anchor="center", font=("Garamond", 10, "bold"))
+l1 = Label(text="POKEPENJAT", background="white", foreground="Black", width=90, border= 10, anchor="center", font=("Garamond", 10, "bold"))
 l1.place(x=0,y=0)
 
 l2 = Label(image=defaultimg)
 l2.place(x=50,y=50)
 
-l3 = Label(image=imgPK)
+l3 = Label(image=imgPK, bg="#ec363d")
 l3.place(x=400,y=150)
 
-eguions = Label(text="", bg="Orange")
-eguions.place(x=120,y=255)
+eguions = Label(text="", bg="#ec363d")
+eguions.place(x=110,y=255)
 
 
 entrada = Entry(win, validate='key')
-entrada.place(x=140,y=280, width=20)
+entrada.place(x=140,y=289, width=20)
 entrada['validatecommand'] = (entrada.register(limit_input), '%P')
 
 entrada.bind("<Return>", comprovar)
 
-marcador_vides = Label(text="Vides: "+str(vides), bg="Orange")
+marcador_vides = Label(text="Vides: "+str(vides), bg="#ec363d")
 marcador_vides.place(x=400,y=50)
+marcador_vides.config(font=("Garamond", 10, "bold"))
 
-marcador_lletra = Label(text="Lletres adivinades: ", bg="Orange", wraplength=200)
+marcador_lletra = Label(text="Lletres utilitzades: ", bg="#ec363d", wraplength=200)
 marcador_lletra.place(x=400,y=90)
+marcador_lletra.config(font=("Garamond", 10, "bold"))
 
-marcador_partides = Label(text="Partides jugades: ", bg="Orange")
+marcador_partides = Label(text="Partides jugades: ", bg="#ec363d")
 marcador_partides.place(x=400,y=70)
+marcador_partides.config(font=("Garamond", 10, "bold"))
 
 #Botons
 bcomençar = Button(text="Començar", command=començar)
-bcomençar.place(x=70,y=310)
+bcomençar.place(x=70,y=320)
 bsortir = Button(text="Sortir", command=win.destroy)
-bsortir.place(x=170,y=310)
+bsortir.place(x=170,y=320)
 
 win.mainloop()
