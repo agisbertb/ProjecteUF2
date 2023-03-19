@@ -8,7 +8,7 @@
 - [Descripció🔍](#descripció)
 - [Requisits💻](#requisits)
 - [Guia usuari📖](#guia-usuari)
-- [Autors🧑‍](#autors)
+- [Autors👨🏿👨🏻](#autors)
 
 
 ## Descripció🔍
@@ -37,7 +37,7 @@ Si guanyes la partida podràs seleccionar entre repetir la partida o sortir de l
 
 Si perds la partida podrà començar una partida nova o sortir de l'aplicació.
 
-## Autors🧑
+## Autors👨🏿👨🏻
 ---
 - [Omar El Balaoui Ben Zaid](https://github.com/omarelbalaoui)
 - [Andreu Gisbert Bel](https://github.com/agisbertb/)
