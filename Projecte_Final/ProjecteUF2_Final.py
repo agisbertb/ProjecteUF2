@@ -9,7 +9,7 @@ from keyboard import *
 vides = 6
 guardades = set()
 partides= 0
-r, g, b,a = 236,54,61,255
+
 
 
 with open("llista.txt") as llista:
@@ -41,7 +41,7 @@ def començar():
       global partides
       partides += 1
       marcador_partides.config(text="Partides jugades: "+str(partides)) 
-      l2.config(image=img_inici)
+      l2.config(image=img_inici,bg="#ec363d")
       aleatori()
 #Funció per reiniciar la partida
 def reiniciar():
@@ -130,7 +130,7 @@ imgPK = ImageTk.PhotoImage(imgPK)
 l1 = Label(text="POKEPENJAT", background="white", foreground="Black", width=90, border= 10, anchor="center", font=("Garamond", 10, "bold"))
 l1.place(x=0,y=0)
 
-l2 = Label(image=defaultimg)
+l2 = Label(image=defaultimg,bg="#ec363d")
 l2.place(x=50,y=50)
 
 l3 = Label(image=imgPK, bg="#ec363d")
