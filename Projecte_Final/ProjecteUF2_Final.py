@@ -10,32 +10,32 @@ vides = 6
 guardades = set()
 partides= 0
 
-
-
 with open("llista.txt") as llista:
      llista = llista.read().splitlines()
 
-#Funcio per limitar la entrada a una lletra
+#Funció per limitar una entrada per teclat
 def limit_input(text):
     if len(text) > 1:
         return False
     return True
 
-#Funcio per canviar la imatge
+#Funció per canviar la imatge
 def forca():
       global img
       img = Image.open("imatges/img"+str(vides)+".png")
       img = img.resize((200, 200))
       img = ImageTk.PhotoImage(img)
       l2.config(image=img, bg="#ec363d")
-#Funcio element de la llista random
+
+#Funció element de la llista random
 def aleatori():
     global paraula
 
     paraula = random.choice(llista)
     guions = "-" * len(paraula)
     eguions.config(text=guions, font=("Garamond", 15, "bold"))
-#Funció per comenzar la partida
+
+#Funció per començar la partida
 def començar():
       #Començar la partida
       global partides
@@ -43,6 +43,7 @@ def començar():
       marcador_partides.config(text="Partides jugades: "+str(partides)) 
       l2.config(image=img_inici,bg="#ec363d")
       aleatori()
+
 #Funció per reiniciar la partida
 def reiniciar():
       global guardades
@@ -55,48 +56,50 @@ def reiniciar():
 
       #Borrar contingut de guardades
       guardades = set()
-      #Borrar contingut de eguions
+      #Borrar contingut d'eguions
       eguions.config(text="")
       #Borrar contingut de marcador_vides
       marcador_vides.config(text="Vides: "+str(vides))
       #Borrar contingut de marcador_lletra
       marcador_lletra.config(text="Lletres adivinades: "+str(guardades))
-      #Borrar contingut de entrada
+      #Borrar contingut d'entrada
       entrada.delete(0, END)
       l2.config(image=img_inici)
       aleatori()
-#Funció per comprovar la entrada
+
+#Funció per comprovar l'entrada
 def comprovar(*args):
       global vides
       lletra = entrada.get()[0]
       bcomençar.config(text="Reiniciar", command=reiniciar)
       
-#Guardar letra en guardades
+#Guardar lletra ha guardades
       if lletra in guardades:
             messagebox.showwarning(message="Ja has introduit la lletra "+lletra+"\n""introdueïx una altra lletra", title="Lletra introduida")
             entrada.delete(0, END)
             return      
       guardades.add(lletra)
+
 #Comprovar si la lletra esta en la paraula
       if lletra in paraula:
-                  for i in range(len(paraula)):
-                        if paraula[i] == lletra:
-                                    eguions.config(text=eguions.cget("text")[:i] + lletra + eguions.cget("text")[i+1:], font=("Garamond", 15, "bold"))
-                  if "-" not in eguions.cget("text"):
-                        l2.config(image=imgG)
-                        if messagebox.askyesno(message="¿Vols tornar ha jugar?", title="Has guanyat") == True:
-                              reiniciar()
-                        else:
-                              win.destroy()
-      else:
-                  vides -= 1
-                  if vides == 0:
-                        l2.config(image=imgP)
-                        if messagebox.askyesno(message="La paraula era "+paraula+", Vols tornar ha jugar?", title="Has perdut") == True:
-                              reiniciar()
-                        else:
-                              win.destroy()
+            for i in range(len(paraula)):
+                  if paraula[i] == lletra:
+                              eguions.config(text=eguions.cget("text")[:i] + lletra + eguions.cget("text")[i+1:], font=("Garamond", 15, "bold"))
+            if "-" not in eguions.cget("text"):
+                  l2.config(image=imgG)
+                  if messagebox.askyesno(message="¿Vols tornar ha jugar?", title="Has guanyat") == True:
+                        reiniciar()
                   else:
+                        win.destroy()
+      else:
+            vides -= 1
+            if vides == 0:
+                  l2.config(image=imgP)
+                  if messagebox.askyesno(message="La paraula era "+paraula+", Vols tornar ha jugar?", title="Has perdut") == True:
+                        reiniciar()
+                  else:
+                        win.destroy()
+            else:
                         forca()
       marcador_vides.config(text="Vides: "+str(vides), font=("Garamond", 10, "bold"))              
       marcador_lletra.config(text="Lletres utilitzades: "+str(guardades), font=("Garamond", 10, "bold"))
